@@ -1,0 +1,22 @@
+<div>
+  <button
+    *ngFor="let possiblePageSize of possibleRecordsOnPage"
+    (click)="
+      selectedPageSize !== possiblePageSize &&
+        selectPageSize.emit(possiblePageSize)
+    "
+    [class.selected]="selectedPageSize === possiblePageSize"
+  >
+    {{ possiblePageSize }}
+  </button>
+</div>
+
+<div>
+  <button
+    *ngFor="let page of totalCount | calculatePages: pageSize"
+    (click)="selectedPage !== page && selectPage.emit(page)"
+    [class.selected]="selectedPage === page"
+  >
+    {{ page }}
+  </button>
+</div>

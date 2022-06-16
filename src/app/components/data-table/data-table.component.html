@@ -1,0 +1,63 @@
+<div>
+  <label for="filter">Search: </label>
+  <input
+    id="filter"
+    name="filter"
+    type="text"
+    [formControl]="filterFormControl"
+  />
+</div>
+
+<table>
+  <thead>
+    <th>id</th>
+    <th>rating</th>
+    <th>reviews count</th>
+    <th>nomenclature</th>
+    <th>sku</th>
+    <th>name</th>
+    <th>brand</th>
+    <th>brand id</th>
+    <th>ordered</th>
+    <th>sold quantity</th>
+    <th>sold amount</th>
+    <th>ordered amount</th>
+    <th>availability</th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let product of products$
+          | async
+          | filteredProducts: filterFormControl.value
+          | paginatedProducts: pageSize:selectedPage
+      "
+    >
+      <td>{{ product.id }}</td>
+      <td>{{ product.wbRating }}</td>
+      <td>{{ product.reviewsCount }}</td>
+      <td>{{ product.nomenclature }}</td>
+      <td>{{ product.sku }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.brandName }}</td>
+      <td>{{ product.brandId }}</td>
+      <td>{{ product.ordered }}</td>
+      <td>{{ product.soldQuantity }}</td>
+      <td>{{ product.soldAmount }}</td>
+      <td>{{ product.orderedAmount }}</td>
+      <td>{{ product.availability }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<footer>
+  <app-paginator
+    [pageSize]="pageSize"
+    [totalCount]="totalCount$ | async"
+    [selectedPage]="selectedPage"
+    [possibleRecordsOnPage]="possibleRecordsOnPage"
+    [selectedPageSize]="pageSize"
+    (selectPage)="selectedPage = $event"
+    (selectPageSize)="pageSize = $event; selectedPage = 1"
+  ></app-paginator>
+</footer>

@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected {
+  background-color: cornflowerblue;
+}
+
+button {
+  border: none;
+  margin: 5px;
+  font-size: 20px;
+}
